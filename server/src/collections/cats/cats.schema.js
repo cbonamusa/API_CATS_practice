@@ -13,13 +13,13 @@ const catsSchema = new mongoose.Schema({
             required: true,
             trim: true
         },
-        race: {
+        breed: {
             type: String,
             required: true,
         },
         fur: {
             type: String,
-            required: true,
+            required: false,
         },
         history: {
             type: String,
@@ -28,6 +28,10 @@ const catsSchema = new mongoose.Schema({
         location: {
             type: String,
             required: true,
+        },
+        center: {
+            type: String,
+            required: false,
         },
         img: {
             required: false,
