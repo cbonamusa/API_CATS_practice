@@ -3,10 +3,11 @@ const cors = require('cors');
 const morgan = require('morgan');
 const app = express();
 
-const configuration = require('./config/index');
+const configuration = require('./config/index.js');
 const db = require('./db');
 const catsRouter = require('./collections/cats/cats.router');
-// const centersRouter = require('./collections/cats/centers.router');
+const centersRouter = require('./collections/catCenters/centers.router');
+
 
 
 app.use(cors());
@@ -14,7 +15,7 @@ app.use(express.json());
 app.use(morgan('dev'));
 
 app.use('/cats', catsRouter);
-// app.use('/centers', centersRouter);
+app.use('/centers', centersRouter);
 
 
 const startServer = async () => {

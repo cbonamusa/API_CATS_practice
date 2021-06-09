@@ -2,6 +2,11 @@
 const mongoose = require('mongoose');
 
 const catsSchema = new mongoose.Schema({   
+        center: {
+            type: mongoose.Schema.Types.ObjectID,
+            ref: "center",
+            required: true
+        },
         name: {
             type: String,
             required: true,
@@ -39,6 +44,8 @@ const catsSchema = new mongoose.Schema({
     },
     { timestamps: true }
 );
+
+catsSchema.index({ center: 1 });
 
 const Cat = mongoose.model('cat', catsSchema );
 module.exports = Cat;

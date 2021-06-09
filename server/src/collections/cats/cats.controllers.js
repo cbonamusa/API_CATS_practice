@@ -7,6 +7,7 @@ const resp = (element, res, status, errMessage) => {
     res.status(200).json({ results: element });
 }
 
+
 const getCats = async (request, response) => {
     try {
         const cats = await Cat.find().lean().exec();

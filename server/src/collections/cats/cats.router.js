@@ -6,9 +6,9 @@ const cats = Router();
 cats.get("/", catsControllers.getCats);
 cats.post("/", catsControllers.addOneCat);
 
-cats.get("/:id", catsControllers.getOneCat);
-cats.delete("/:id", catsControllers.removeOneCat);
-cats.put("/:id", catsControllers.updateOneCat);
+cats.get("/:cat", catsControllers.getOneCat);
+cats.delete("/:cat", catsControllers.removeOneCat);
+cats.put("/:cat", catsControllers.updateOneCat);
 
 
 
