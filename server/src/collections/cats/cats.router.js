@@ -4,7 +4,7 @@ const catsControllers = require('./cats.controllers');
 const cats = Router();
 
 cats.get("/", catsControllers.CatsControllers.getCats);
-cats.post("/", catsControllers.CatsControllers.addOneCat);
+cats.post("/:centerName", catsControllers.CatsControllers.addOneCat);
 
 cats.get("/:id", catsControllers.CatsControllers.getOneCat);
 cats.delete("/:id", catsControllers.CatsControllers.removeOneCat);
