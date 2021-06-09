@@ -1,11 +1,5 @@
 const Cat = require('./cats.schema');
 
-const resp = (element, res, status, errMessage) => {
-    if (element == null) {
-        return res.status(status).json({error: errMessage });
-    }
-    res.status(200).json({ results: element });
-}
 
 let CatsControllers = {
     resp: (element, res, status, errMessage) => {
