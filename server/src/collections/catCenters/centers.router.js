@@ -11,10 +11,11 @@ centers.post("/", centersControllers.CenterController.addOneCenter);
 centers.get("/:centerId", centersControllers.CenterController.findOne);
 centers.delete("/:centerId", centersControllers.CenterController.deleteCenter);
 centers.put("/:centerId", centersControllers.CenterController.updateOneCenter);
-//centers.get("/:centerId/cats", centersControllers.CenterController.getCatsFromCenter);
-centers.get("/:centerId/cats", centersControllers.CenterController.getAllCatsFromCenter);
+centers.get("/:centerId/cats", centersControllers.CenterController.getCatsFromCenter);
 
-centers.post("/:centerId/cats", centersControllers.CenterController.addCatInCenter);
+//centers.post("/:centerId/cats", centersControllers.CenterController.addCatInCenter);
+//centers.get("/:centerId/cats", centersControllers.CenterController.getCatsFromCenter);
+
 
 
 

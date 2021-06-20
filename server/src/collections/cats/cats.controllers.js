@@ -43,7 +43,6 @@ let CatsControllers = {
             response.status(500).end();
         }
     },
-
     //Add one cat without center
     addOneCat: async (request, response) => {
         try {
