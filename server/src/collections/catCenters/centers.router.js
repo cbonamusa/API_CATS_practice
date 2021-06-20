@@ -8,10 +8,14 @@ const centers = Router();
 centers.get("/", centersControllers.CenterController.getAllCenters);
 centers.post("/", centersControllers.CenterController.addOneCenter);
 
-centers.get("/:centerName", centersControllers.CenterController.findOne);
-centers.delete("/:centerName", centersControllers.CenterController.deleteCenter);
-centers.put("/:id", centersControllers.CenterController.updateOneCenter);
-centers.get("/:centerName/cats", centersControllers.CenterController.getCatsFromCenter);
+centers.get("/:centerId", centersControllers.CenterController.findOne);
+centers.delete("/:centerId", centersControllers.CenterController.deleteCenter);
+centers.put("/:centerId", centersControllers.CenterController.updateOneCenter);
+//centers.get("/:centerId/cats", centersControllers.CenterController.getCatsFromCenter);
+centers.get("/:centerId/cats", centersControllers.CenterController.getAllCatsFromCenter);
+
+centers.post("/:centerId/cats", centersControllers.CenterController.addCatInCenter);
+
 
 
 module.exports = centers;

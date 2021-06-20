@@ -40,9 +40,13 @@ const catsSchema = new mongoose.Schema({
         },
         img: {
             required: false,
+            //TO DO: get files - logic
         }
     },
-    { timestamps: true }
+    { 
+        timestamps: true,
+        versionKey: false
+    }
 );
 
 catsSchema.index({ center: 1 });

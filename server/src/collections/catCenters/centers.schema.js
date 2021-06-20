@@ -10,12 +10,28 @@ const centerSchema = new mongoose.Schema({
             type: String,
             required: true
         },
+        address: {
+            type: String,
+            required: false
+        },
+        contactPhone: {
+            type: Number,
+            required: true
+        },
+        contactEmail: {
+            type: String,
+            required: false
+        },
         cats: [{
             type: mongoose.Schema.Types.ObjectID,
-            ref: "cat"
+            ref: "cat",
+            default: 'No cats yet'
         }]
     },
-    { timestamps: true }
+    { 
+        timestamps: false,
+        versionKey: false
+    }
 );
 centerSchema.index({ centerName: 1 }, { unique: true });
 module.exports = mongoose.model("center", centerSchema);
