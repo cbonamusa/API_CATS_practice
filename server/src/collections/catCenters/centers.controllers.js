@@ -92,7 +92,6 @@ let CenterController = {
     }, */
     addCatInCenter02: async (request, response) => {
         try {
-            // Get Center
             const catsInCenter = await CenterSchema.aggregate(
                 [
                     {

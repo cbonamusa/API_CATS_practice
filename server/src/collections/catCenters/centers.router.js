@@ -1,6 +1,5 @@
 const { Router } = require('express');
 const centersControllers = require('./centers.controllers');
-const catsControllers = require('../cats/cats.controllers');
 
 
 const centers = Router();
@@ -15,8 +14,6 @@ centers.get("/:centerId/cats", centersControllers.CenterController.getCatsFromCe
 
 //centers.post("/:centerId/cats", centersControllers.CenterController.addCatInCenter);
 //centers.get("/:centerId/cats", centersControllers.CenterController.getCatsFromCenter);
-
-
 
 
 module.exports = centers;
