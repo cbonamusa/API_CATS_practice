@@ -1,5 +1,5 @@
 const Cat = require('./cats.schema');
-const CenterSchema = require('../catCenters/centers.schema');
+const CenterSchema = require('../centers/centers.schema');
 
 
 let CatsControllers = {

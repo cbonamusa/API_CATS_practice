@@ -31,13 +31,9 @@ const catsSchema = new mongoose.Schema({
             type: String,
             required: false,
         },
-        location: {
-            type: String,
-            required: true,
-        },
         img: {
             required: false,
-            //TO DO: get files - logic
+            //TO DO:  files - logic
         }
     },
     { 
@@ -47,6 +43,5 @@ const catsSchema = new mongoose.Schema({
 );
 
 //catsSchema.index({ center: 1 });
-
 const Cat = mongoose.model('cat', catsSchema );
 module.exports = Cat;

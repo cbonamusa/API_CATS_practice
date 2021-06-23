@@ -6,7 +6,7 @@ const app = express();
 const configuration = require('./config/index.js');
 const db = require('./db');
 const catsRouter = require('./collections/cats/cats.router');
-const centersRouter = require('./collections/catCenters/centers.router');
+const centersRouter = require('./collections/centers/centers.router');
 
 
 
