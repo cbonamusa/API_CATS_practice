@@ -1,5 +1,5 @@
 const Cat = require('./cats.schema');
-const Center = require('../catCenters/centers.schema');
+const CenterSchema = require('../catCenters/centers.schema');
 
 
 let CatsControllers = {
@@ -53,26 +53,40 @@ let CatsControllers = {
             response.status(400).end();
         }
     },
-    addOneCatInCenter: async (request, response) => {
+    /* This is the bad way but WORKS  */
+    addOneCatInCenterBADWAY: async (request, response) => {
         try {
-
             const newCat = new Cat(request.body);
             await newCat.save();
-            const center = await Center.findById({_id: request.params.centerId})
+            const center = await CenterSchema.findById({_id: request.params.centerId})
             center.cats.push(newCat);
             await center.save();
-
             response.status(200).json({results:newCat});
+     
         } catch(e) {
             console.error(e);
             response.status(400).end();
         }
     },
+    /* Test to better way - does not work */
+    addOneCatInCenter: async (request, response) => {
+        Cat.create(request.body)
+        .then(newCat => {
+            return CenterSchema.findOneAndUpdate({ _id: request.params.id }, {$push: {cats: newCat._id}}, { new: true });
+        })
+        .then(center => {
+          response.status(200).json({results:center});
+        })
+        .catch(e => {
+            console.error(e);
+            response.status(400).end();
+        });
+    },
 
     getOneCat: async(request, response) => {
         try {
-            const cat = await Cat.find( {_id: request.params.id}).lean().exec();
-            CatsControllers.resp(cat, response,  404, `Cat ID: ${request.params.id} ,not found, couldn't get`);
+            const cat = await Cat.find( {_id: request.params.catId}).populate('centers').exec();
+            CatsControllers.resp(cat, response,  404, `Cat ID: ${request.params.catId} ,not found, couldn't get`);
         } catch(e) {
             console.error(e);
             response.status(400).end();
@@ -81,8 +95,8 @@ let CatsControllers = {
 
     removeOneCat: async (request, response) => {
         try {
-            const cat = await Cat.findOneAndRemove({ _id: request.params.id }).lean().exec();
-            CatsControllers.resp(cat, response, 404, `Cat ID: ${request.params.id} ,not found, coudn't remove`);
+            const cat = await Cat.findOneAndRemove({ _id: request.params.catId }).lean().exec();
+            CatsControllers.resp(cat, response, 404, `Cat ID: ${request.params.catId} ,not found, coudn't remove`);
         } catch(e) {
             console.error(e);
             response.status(400).end();
@@ -92,11 +106,11 @@ let CatsControllers = {
     updateOneCat: async(request, response) => {
         try {
             const cat = await Cat.updateOne(
-                { _id: request.params.id },
+                { _id: request.params.catId },
                 request.body,
                 { new: true }
                 ).lean().exec();
-            CatsControllers.resp(cat, response, 404, `Cat ID: ${request.params.id} ,not found, couldn't Update`);
+            CatsControllers.resp(cat, response, 404, `Cat ID: ${request.params.catId} ,not found, couldn't Update`);
         } catch(e) {
             console.error(e);
             response.status(400).end();

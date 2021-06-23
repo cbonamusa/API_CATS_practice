@@ -5,6 +5,7 @@ const catsSchema = new mongoose.Schema({
         center: {
             type: mongoose.Schema.Types.ObjectID,
             ref: "center",
+            id: "_id",
             required: true
         },
         name: {
@@ -34,10 +35,6 @@ const catsSchema = new mongoose.Schema({
             type: String,
             required: true,
         },
-        center: {
-            type: String,
-            required: false,
-        },
         img: {
             required: false,
             //TO DO: get files - logic
@@ -49,7 +46,7 @@ const catsSchema = new mongoose.Schema({
     }
 );
 
-catsSchema.index({ center: 1 });
+//catsSchema.index({ center: 1 });
 
 const Cat = mongoose.model('cat', catsSchema );
 module.exports = Cat;

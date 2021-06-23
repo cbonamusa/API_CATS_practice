@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const centerSchema = new mongoose.Schema({
         centerName: {
             type: String,
-            required: true
+            required: true,
+            trim: true
         },
         location: {
             type: String,
@@ -33,5 +34,5 @@ const centerSchema = new mongoose.Schema({
         versionKey: false
     }
 );
-centerSchema.index({ centerName: 1 }, { unique: true });
+//centerSchema.index({ centerName: 1 }, { unique: true });
 module.exports = mongoose.model("center", centerSchema);

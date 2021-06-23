@@ -12,8 +12,5 @@ centers.delete("/:centerId", centersControllers.CenterController.deleteCenter);
 centers.put("/:centerId", centersControllers.CenterController.updateOneCenter);
 centers.get("/:centerId/cats", centersControllers.CenterController.getCatsFromCenter);
 
-//centers.post("/:centerId/cats", centersControllers.CenterController.addCatInCenter);
-//centers.get("/:centerId/cats", centersControllers.CenterController.getCatsFromCenter);
-
 
 module.exports = centers;

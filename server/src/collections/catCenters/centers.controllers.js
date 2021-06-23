@@ -55,16 +55,45 @@ let CenterController = {
         }
     },
 
+    //THIS WORKS! :) 
     getCatsFromCenter: async (request, response) => {
         try {
             const {centerId} = request.params;
-            const getCats = await CenterSchema.findById(centerId).exec();
-            response.status(200).json({results: getCats});
+            const getCenter = await CenterSchema.findById(centerId).populate('cats').exec();
+                    
+            response.status(200).json({results: getCenter});
         } catch(e) {
             console.error(e);
             response.status(400).end();
         }
     },
+    addCatInCenter: async (request, response) => {
+        try {
+            const catsInCenter = await CenterSchema.aggregate(
+                [
+                    {
+                        $lookup: {
+                            from: 'cat',
+                            localField: "_id",
+                            foreignField: "center_id",
+                            as: "catsInCenter"
+                        }
+                    },
+                    {   
+                        $match: { _id: request.params.centerId },
+                        $unwind: "$catsInCenter"
+                    }
+                ]
+            ).pretty();
+            response.status(200).json({results: catsInCenter});
+
+        } catch(e) {
+            console.error(e);
+            response.status(400).end();
+        }
+    }
+
+    /* TESTS FAILED 
     getAllCatsFromCenter: async (request, response) => {
         try {
             const getCats = await CenterSchema.find({_id:request.params.id}).populate("cats").lean().exec();
@@ -74,7 +103,6 @@ let CenterController = {
             response.status(400).end();
         }
     },
-    /*
     addCatInCenter: async (request, response) => {
         try {
             const {centerId} = request.params;
@@ -89,29 +117,9 @@ let CenterController = {
             console.error(e);
             response.status(400).end();
         }
-    }, */
-    addCatInCenter02: async (request, response) => {
-        try {
-            const catsInCenter = await CenterSchema.aggregate(
-                [
-                    {
-                        $lookup: {
-                            from: 'cat',
-                            localField: "cats",
-                            foreignField: "_id",
-                            as: "catsInCenter"
-                        }
-                    },
-                    { $unwind: "$catsInCenter"}
-                ]
-            );
-            response.status(200).json({results: catsInCenter});
+    }, 
 
-        } catch(e) {
-            console.error(e);
-            response.status(400).end();
-        }
-    }
+    */
 }
 
 module.exports = {
